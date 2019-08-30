@@ -1,0 +1,11 @@
+sample_file: "samples.tsv"
+read_file: "reads.tsv"
+
+read_length: 150
+mito: "MT"
+adapt_3p_first_read: "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC"
+adapt_3p_second_read: "AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT"
+workdir: "/work/project/fragencode/tools/rnaseq/fragencode-rnaseq-pipelines/fragencode-rnaseq-mapquantassemble/test"
+
+genome: "/work/project/fragencode/tools/rnaseq/fragencode-rnaseq-pipelines/fragencode-rnaseq-mapquantassemble/test/small.fa"
+gtf: "/work/project/fragencode/tools/rnaseq/fragencode-rnaseq-pipelines/fragencode-rnaseq-mapquantassemble/test/small.gtf"

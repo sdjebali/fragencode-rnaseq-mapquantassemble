@@ -1,0 +1,2 @@
+sample	read1	read2
+pig1_liver	/work/project/fragencode/tools/rnaseq/fragencode-rnaseq-pipelines/fragencode-rnaseq-mapquantassemble/test/subset_1_Sus-scrofa-11203-Foie_TTAGGC_L002_R1.fastq.gz	/work/project/fragencode/tools/rnaseq/fragencode-rnaseq-pipelines/fragencode-rnaseq-mapquantassemble/test/subset_1_Sus-scrofa-11203-Foie_TTAGGC_L002_R2.fastq.gz
