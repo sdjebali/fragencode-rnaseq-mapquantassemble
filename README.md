@@ -1,5 +1,5 @@
 # FR-AgENCODE RNA-seq pipeline
-This is the pipeline to process RNA-seq data from raw reads to reference and novel gene and transcript expression used in the FR-AgENCODE project.
+This is the pipeline to process RNA-seq data from raw reads to reference and novel gene and transcript expression used in the FR-AgENCODE project http://www.fragencode.org/.
 It can be used in the context of other projects but data need to be paired-end and stranded (type mate2_sense).
 Also, provided pairs of fastq need to correspond to bioreplicates and not to technical replicates or runs.
 
