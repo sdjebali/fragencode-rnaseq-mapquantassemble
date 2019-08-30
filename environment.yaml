@@ -1,0 +1,17 @@
+name: mapquantassemble
+channels:
+  - conda-forge
+  - bioconda
+  - r
+  - defaults
+dependencies:
+  - perl =5.26.2
+  - python =3.6
+  - biopython =1.73
+  - snakemake-minimal =5.5.0
+  - drmaa =0.7.9
+  - pandas =0.23
+  - cutadapt =2.1
+  - samtools =1.9
+  - STAR =2.7.2a
+  - bedtools =2.28.0
