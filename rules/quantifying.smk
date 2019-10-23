@@ -4,22 +4,22 @@
 ##############################################
 rule idxquant:
     input:
-        gtf = "{annot}/assembling/clean.annot.gtf",
+        gtf = os.path.join(WORKDIR, "{annot}/assembling/clean.annot.gtf"),
         genome = GENOME
     output:
-        "{annot}/assembling/RSEM.grp",
-        "{annot}/assembling/RSEM.ti",
-        "{annot}/assembling/RSEM.chrlist",
-        "{annot}/assembling/RSEM.transcripts.fa",
-        "{annot}/assembling/RSEM.seq",
-        "{annot}/assembling/RSEM.idx.fa",
-        "{annot}/assembling/RSEM.n2g.idx.fa"
+        os.path.join(WORKDIR, "{annot}/assembling/RSEM.grp"),
+        os.path.join(WORKDIR, "{annot}/assembling/RSEM.ti"),
+        os.path.join(WORKDIR, "{annot}/assembling/RSEM.chrlist"),
+        os.path.join(WORKDIR, "{annot}/assembling/RSEM.transcripts.fa"),
+        os.path.join(WORKDIR, "{annot}/assembling/RSEM.seq"),
+        os.path.join(WORKDIR, "{annot}/assembling/RSEM.idx.fa"),
+        os.path.join(WORKDIR, "{annot}/assembling/RSEM.n2g.idx.fa")
     params:
-        rsem_prefix = "{annot}/assembling/RSEM"
+        rsem_prefix = os.path.join(WORKDIR, "{annot}/assembling/RSEM")
     threads:
         4
     log:
-        "logs/indexing/transcriptome/idx.transcriptome.{annot}.log"
+        os.path.join(WORKDIR, "logs/indexing/transcriptome/idx.transcriptome.{annot}.log")
     conda:
         "../envs/rsem.yaml"
     shell:
@@ -33,24 +33,24 @@ rule idxquant:
 ################################
 rule quant:
     input:
-        "{annot}/assembling/RSEM.grp",
-        "{annot}/assembling/RSEM.ti",
-        "{annot}/assembling/RSEM.chrlist",
-        "{annot}/assembling/RSEM.transcripts.fa",
-        "{annot}/assembling/RSEM.seq",
-        "{annot}/assembling/RSEM.idx.fa",
-        "{annot}/assembling/RSEM.n2g.idx.fa",
-        bam="{annot}/mapping/{tiss}/{anim}/{sample}/Aligned.toTranscriptome.out.bam"
+        os.path.join(WORKDIR, "{annot}/assembling/RSEM.grp"),
+        os.path.join(WORKDIR, "{annot}/assembling/RSEM.ti"),
+        os.path.join(WORKDIR, "{annot}/assembling/RSEM.chrlist"),
+        os.path.join(WORKDIR, "{annot}/assembling/RSEM.transcripts.fa"),
+        os.path.join(WORKDIR, "{annot}/assembling/RSEM.seq"),
+        os.path.join(WORKDIR, "{annot}/assembling/RSEM.idx.fa"),
+        os.path.join(WORKDIR, "{annot}/assembling/RSEM.n2g.idx.fa"),
+        bam=os.path.join(WORKDIR, "{annot}/mapping/{tiss}/{anim}/{sample}/Aligned.toTranscriptome.out.bam")
     output:
-        tr="{annot}/quantifying/{tiss}/{anim}/{sample}/Quant.isoforms.results",
-        gn="{annot}/quantifying/{tiss}/{anim}/{sample}/Quant.genes.results"
+        tr=os.path.join(WORKDIR, "{annot}/quantifying/{tiss}/{anim}/{sample}/Quant.isoforms.results"),
+        gn=os.path.join(WORKDIR, "{annot}/quantifying/{tiss}/{anim}/{sample}/Quant.genes.results")
     params:
-        rsem_prefix = "{annot}/assembling/RSEM",
-        out_prefix = "{annot}/quantifying/{tiss}/{anim}/{sample}/Quant"
+        rsem_prefix = os.path.join(WORKDIR, "{annot}/assembling/RSEM"),
+        out_prefix = os.path.join(WORKDIR, "{annot}/quantifying/{tiss}/{anim}/{sample}/Quant")
     threads:
         4
     log:
-        "logs/quantification/{tiss}/{anim}/{sample}.{annot}.quant.log"
+        os.path.join(WORKDIR, "logs/quantification/{tiss}/{anim}/{sample}.{annot}.quant.log")
     conda:
         "../envs/rsem.yaml"
     shell:

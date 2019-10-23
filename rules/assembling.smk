@@ -4,19 +4,19 @@
 #####################################
 rule assemble:
     input:
-        "ref/mapping/{tiss}/{anim}/{sample}/Aligned.sortedByCoord.out.bam"
+        os.path.join(WORKDIR, "ref/mapping/{tiss}/{anim}/{sample}/Aligned.sortedByCoord.out.bam")
     output:
-        tr="new/assembling/{tiss}/{anim}/{sample}/transcripts.gtf",
-        gn="new/assembling/{tiss}/{anim}/{sample}/genes.fpkm_tracking",
-        iso="new/assembling/{tiss}/{anim}/{sample}/isoforms.fpkm_tracking",
-        skp="new/assembling/{tiss}/{anim}/{sample}/skipped.gtf"
+        tr=os.path.join(WORKDIR, "new/assembling/{tiss}/{anim}/{sample}/transcripts.gtf"),
+        gn=os.path.join(WORKDIR, "new/assembling/{tiss}/{anim}/{sample}/genes.fpkm_tracking"),
+        iso=os.path.join(WORKDIR, "new/assembling/{tiss}/{anim}/{sample}/isoforms.fpkm_tracking"),
+        skp=os.path.join(WORKDIR, "new/assembling/{tiss}/{anim}/{sample}/skipped.gtf")
     params:
         gtf=GTF,
-        outdir="new/assembling/{tiss}/{anim}/{sample}"
+        outdir=os.path.join(WORKDIR, "new/assembling/{tiss}/{anim}/{sample}")
     threads:
         4
     log:
-        "logs/assembling/{tiss}/{anim}/{sample}.assemble.log"
+        os.path.join(WORKDIR, "logs/assembling/{tiss}/{anim}/{sample}.assemble.log")
     shell:
         "cufflinks --max-intron-length 100000 --num-threads {threads} "
         "--overlap-radius 5 --library-type fr-firststrand "
@@ -28,19 +28,17 @@ rule assemble:
 ###################################################################
 rule merge:
     input:
-        expand("new/assembling/{tiss}/{anim}/{sample}/transcripts.gtf", sample=samples.index, tiss=samples["tissue"], anim=samples["animal"])
+        expand(os.path.join(WORKDIR, "new/assembling/{tiss}/{anim}/{sample}/transcripts.gtf"), sample=samples.index, tiss=samples["tissue"], anim=samples["animal"])
     output:
-        "new/assembling/merged.gtf"
+        os.path.join(WORKDIR, "new/assembling/merged.gtf")
     params:
         gtf=GTF,
         genome=GENOME,
-        outdir="new/assembling"
+        outdir=os.path.join(WORKDIR, "new/assembling")
     threads:
         4
     log:
-        "logs/merging/merge.log"
-    conda:
-        "../envs/cuffmerge.yaml"
+        os.path.join(WORKDIR, "logs/merging/merge.log")
     shell:
         "ls -1 {input} > {params.outdir}/gtf_list.txt; "
         "cuffmerge --num-threads {threads} --ref-gtf {params.gtf} "

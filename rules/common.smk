@@ -26,4 +26,4 @@ def get_gtf(wildcards):
     if wildcards.annot == "ref":
         return GTF
     elif wildcards.annot == "new":
-        return "new/assembling/merged.gtf"
+        return os.path.join(WORKDIR, "new/assembling/merged.gtf")

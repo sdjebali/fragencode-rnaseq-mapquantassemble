@@ -2,5 +2,5 @@ __default__:
   mem: 8
   name: "{rule}.{wildcards}"
   time: "96:00:00"
-  output: "logs/cluster/{rule}.{wildcards}.out"
-  error: "logs/cluster/{rule}.{wildcards}.err"
+  output: "~/work/logs/cluster/{rule}.{wildcards}.out"
+  error: "~/work/logs/cluster/{rule}.{wildcards}.err"
