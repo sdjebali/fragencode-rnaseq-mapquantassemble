@@ -1,5 +1,5 @@
 import pandas as pd
-from snakemake.utils import validate
+#from snakemake.utils import validate
 
 include: "rules/common.smk"
 
@@ -20,7 +20,7 @@ gtfdir = os.path.dirname(GTF)
 
 
 ##### load config and read file #####
-configfile: "config.yaml"
+#configfile: "config.yaml"
 #validate(config, schema="schemas/config.schema.yaml")
 
 samples = pd.read_table(config["sample_file"]).set_index("sample", drop=False)
