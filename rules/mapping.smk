@@ -5,30 +5,30 @@
 rule idxmap:
     input:
         genome = GENOME,
-        gtf = "{annot}/assembling/clean.annot.gtf"
+        gtf = os.path.join(WORKDIR, "{annot}/assembling/clean.annot.gtf")
     output:
-        "{annot}/assembling/genomeParameters.txt",
-        "{annot}/assembling/chrStart.txt",
-        "{annot}/assembling/chrNameLength.txt",
-        "{annot}/assembling/chrName.txt",
-        "{annot}/assembling/chrLength.txt",
-        "{annot}/assembling/geneInfo.tab",
-        "{annot}/assembling/exonGeTrInfo.tab",
-        "{annot}/assembling/transcriptInfo.tab",
-        "{annot}/assembling/exonInfo.tab",
-        "{annot}/assembling/sjdbList.fromGTF.out.tab",
-        "{annot}/assembling/sjdbList.out.tab",
-        "{annot}/assembling/sjdbInfo.txt",
-        "{annot}/assembling/SAindex",
-        "{annot}/assembling/SA",
-        "{annot}/assembling/Genome"
+        os.path.join(WORKDIR, "{annot}/assembling/genomeParameters.txt"),
+        os.path.join(WORKDIR, "{annot}/assembling/chrStart.txt"),
+        os.path.join(WORKDIR, "{annot}/assembling/chrNameLength.txt"),
+        os.path.join(WORKDIR, "{annot}/assembling/chrName.txt"),
+        os.path.join(WORKDIR, "{annot}/assembling/chrLength.txt"),
+        os.path.join(WORKDIR, "{annot}/assembling/geneInfo.tab"),
+        os.path.join(WORKDIR, "{annot}/assembling/exonGeTrInfo.tab"),
+        os.path.join(WORKDIR, "{annot}/assembling/transcriptInfo.tab"),
+        os.path.join(WORKDIR, "{annot}/assembling/exonInfo.tab"),
+        os.path.join(WORKDIR, "{annot}/assembling/sjdbList.fromGTF.out.tab"),
+        os.path.join(WORKDIR, "{annot}/assembling/sjdbList.out.tab"),
+        os.path.join(WORKDIR, "{annot}/assembling/sjdbInfo.txt"),
+        os.path.join(WORKDIR, "{annot}/assembling/SAindex"),
+        os.path.join(WORKDIR, "{annot}/assembling/SA"),
+        os.path.join(WORKDIR, "{annot}/assembling/Genome")
     params:
         readlength=config["read_length"],
-        stardir="{annot}/assembling"
+        stardir=os.path.join(WORKDIR, "{annot}/assembling")
     threads:
         4
     log:
-        "logs/indexing/genome/idx.genome.{annot}.log"
+        os.path.join(WORKDIR, "logs/indexing/genome/idx.genome.{annot}.log")
     shell:
         "overhang=`expr {params.readlength} - 1`; "
         "STAR --runThreadN {threads} --runMode genomeGenerate "
@@ -41,34 +41,34 @@ rule idxmap:
 ##########################################
 rule mapref:
     input:
-        "{annot}/assembling/genomeParameters.txt",
-        "{annot}/assembling/chrStart.txt",
-        "{annot}/assembling/chrNameLength.txt",
-        "{annot}/assembling/chrName.txt",
-        "{annot}/assembling/chrLength.txt",
-        "{annot}/assembling/geneInfo.tab",
-        "{annot}/assembling/exonGeTrInfo.tab",
-        "{annot}/assembling/transcriptInfo.tab",
-        "{annot}/assembling/exonInfo.tab",
-        "{annot}/assembling/sjdbList.fromGTF.out.tab",
-        "{annot}/assembling/sjdbList.out.tab",
-        "{annot}/assembling/sjdbInfo.txt",
-        "{annot}/assembling/SAindex",
-        "{annot}/assembling/SA",
-        "{annot}/assembling/Genome",
-        read1="trimming/{tiss}/{anim}/{sample}/{sample}_R1_val_1.fq.gz",
-        read2="trimming/{tiss}/{anim}/{sample}/{sample}_R2_val_2.fq.gz"
+        os.path.join(WORKDIR, "{annot}/assembling/genomeParameters.txt"),
+        os.path.join(WORKDIR, "{annot}/assembling/chrStart.txt"),
+        os.path.join(WORKDIR, "{annot}/assembling/chrNameLength.txt"),
+        os.path.join(WORKDIR, "{annot}/assembling/chrName.txt"),
+        os.path.join(WORKDIR, "{annot}/assembling/chrLength.txt"),
+        os.path.join(WORKDIR, "{annot}/assembling/geneInfo.tab"),
+        os.path.join(WORKDIR, "{annot}/assembling/exonGeTrInfo.tab"),
+        os.path.join(WORKDIR, "{annot}/assembling/transcriptInfo.tab"),
+        os.path.join(WORKDIR, "{annot}/assembling/exonInfo.tab"),
+        os.path.join(WORKDIR, "{annot}/assembling/sjdbList.fromGTF.out.tab"),
+        os.path.join(WORKDIR, "{annot}/assembling/sjdbList.out.tab"),
+        os.path.join(WORKDIR, "{annot}/assembling/sjdbInfo.txt"),
+        os.path.join(WORKDIR, "{annot}/assembling/SAindex"),
+        os.path.join(WORKDIR, "{annot}/assembling/SA"),
+        os.path.join(WORKDIR, "{annot}/assembling/Genome"),
+        read1=os.path.join(WORKDIR, "trimming/{tiss}/{anim}/{sample}/{sample}_R1_val_1.fq.gz"),
+        read2=os.path.join(WORKDIR, "trimming/{tiss}/{anim}/{sample}/{sample}_R2_val_2.fq.gz")
     output:
-        "{annot}/mapping/{tiss}/{anim}/{sample}/Log.final.out",
-        "{annot}/mapping/{tiss}/{anim}/{sample}/Aligned.sortedByCoord.out.bam",
-        "{annot}/mapping/{tiss}/{anim}/{sample}/Aligned.toTranscriptome.out.bam"
+        os.path.join(WORKDIR, "{annot}/mapping/{tiss}/{anim}/{sample}/Log.final.out"),
+        os.path.join(WORKDIR, "{annot}/mapping/{tiss}/{anim}/{sample}/Aligned.sortedByCoord.out.bam"),
+        os.path.join(WORKDIR, "{annot}/mapping/{tiss}/{anim}/{sample}/Aligned.toTranscriptome.out.bam")
     params:
-        stardir="{annot}/assembling",
-        prefix="{annot}/mapping/{tiss}/{anim}/{sample}/"
+        stardir=os.path.join(WORKDIR, "{annot}/assembling"),
+        prefix=os.path.join(WORKDIR, "{annot}/mapping/{tiss}/{anim}/{sample}/")
     threads:
         4
     log:
-        "logs/mapping/{tiss}/{anim}/{sample}.map.{annot}.log"
+        os.path.join(WORKDIR, "logs/mapping/{tiss}/{anim}/{sample}.map.{annot}.log")
     shell:
         # difference with GB version is from --outSAMattributes to --alignSJDBoverhangMin but could be from dcc site
         # that I took from raffine but these could also be defaults parameters so it should not change much the output

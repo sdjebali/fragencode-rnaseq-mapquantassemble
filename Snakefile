@@ -1,5 +1,5 @@
 import pandas as pd
-from snakemake.utils import validate
+#from snakemake.utils import validate
 
 include: "rules/common.smk"
 
@@ -20,7 +20,7 @@ gtfdir = os.path.dirname(GTF)
 
 
 ##### load config and read file #####
-configfile: "config.yaml"
+#configfile: "config.yaml"
 #validate(config, schema="schemas/config.schema.yaml")
 
 samples = pd.read_table(config["sample_file"]).set_index("sample", drop=False)
@@ -39,8 +39,8 @@ wildcard_constraints:
 ###############
 rule all:
     input:
-        expand("{annot}/quantifying/{tiss}/{anim}/{sample}/Quant.isoforms.results", annot=["ref", "new"], sample=samples.index, tiss=samples["tissue"], anim=samples["animal"]),
-        expand("{annot}/quantifying/{tiss}/{anim}/{sample}/Quant.genes.results", annot=["ref", "new"], sample=samples.index, tiss=samples["tissue"], anim=samples["animal"])
+        expand(os.path.join(WORKDIR, "{annot}/quantifying/{tiss}/{anim}/{sample}/Quant.isoforms.results"), annot=["ref", "new"], sample=samples.index, tiss=samples["tissue"], anim=samples["animal"]),
+        expand(os.path.join(WORKDIR, "{annot}/quantifying/{tiss}/{anim}/{sample}/Quant.genes.results"), annot=["ref", "new"], sample=samples.index, tiss=samples["tissue"], anim=samples["animal"])
 
 
 #### load rules #####
