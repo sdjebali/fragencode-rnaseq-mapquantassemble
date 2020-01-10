@@ -39,8 +39,8 @@ wildcard_constraints:
 ###############
 rule all:
     input:
-        expand(os.path.join(WORKDIR, "{annot}/quantifying/{tiss}/{anim}/{sample}/Quant.isoforms.results"), annot=["ref", "new"], sample=samples.index, tiss=samples["tissue"], anim=samples["animal"]),
-        expand(os.path.join(WORKDIR, "{annot}/quantifying/{tiss}/{anim}/{sample}/Quant.genes.results"), annot=["ref", "new"], sample=samples.index, tiss=samples["tissue"], anim=samples["animal"])
+        expand(os.path.join(WORKDIR, "{annot}/quantifying/{sample}/Quant.isoforms.results"), annot=["ref", "new"], sample=samples.index, tiss=samples["tissue"], anim=samples["animal"]),
+        expand(os.path.join(WORKDIR, "{annot}/quantifying/{sample}/Quant.genes.results"), annot=["ref", "new"], sample=samples.index, tiss=samples["tissue"], anim=samples["animal"])
 
 
 #### load rules #####
@@ -48,4 +48,4 @@ include: "rules/trimming.smk"
 include: "rules/mapping.smk"
 include: "rules/quantifying.smk"
 include: "rules/assembling.smk"
-include: "rules/lncrnas.smk"
+#include: "rules/lncrnas.smk"

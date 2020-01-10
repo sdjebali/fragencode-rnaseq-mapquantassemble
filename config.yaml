@@ -5,7 +5,9 @@ read_length: 150
 mito: "MT"
 adapt_3p_first_read: "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC"
 adapt_3p_second_read: "AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT"
-workdir: "/work/project/fragencode/tools/rnaseq/fragencode-rnaseq-pipelines/fragencode-rnaseq-mapquantassemble/test"
+workdir: "/work/project/fragencode/results/rnaseq/bos_taurus"
 
-genome: "/work/project/fragencode/tools/rnaseq/fragencode-rnaseq-pipelines/fragencode-rnaseq-mapquantassemble/test/small.fa"
-gtf: "/work/project/fragencode/tools/rnaseq/fragencode-rnaseq-pipelines/fragencode-rnaseq-mapquantassemble/test/small.gtf"
+#genome: "/work/project/fragencode/data/species/bos_taurus/ARS-UCD1.2.98/bos_taurus.fa"
+#gtf: "/work/project/fragencode/data/species/bos_taurus/ARS-UCD1.2.98/bos_taurus.gtf"
+genome: "/work/project/fragencode/tools/rnaseq/fragencode-rnaseq-pipelines/data/species/bos_taurus/ARS-UCD1.2.98/bos_taurus.fa"
+gtf: "/work/project/fragencode/tools/rnaseq/fragencode-rnaseq-pipelines/data/species/bos_taurus/ARS-UCD1.2.98/bos_taurus.gtf"

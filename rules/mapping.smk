@@ -34,7 +34,7 @@ rule idxmap:
         "STAR --runThreadN {threads} --runMode genomeGenerate "
         "--genomeDir {params.stardir} --genomeFastaFiles {input.genome} "
         "--sjdbGTFfile {input.gtf} --sjdbOverhang $overhang "
-        "--outFileNamePrefix . --limitGenomeGenerateRAM 120000000000 2> {log}"
+        "--outFileNamePrefix . --limitGenomeGenerateRAM 25000000000 2> {log}"
 
 ##########################################
 # Map trimmed reads to genome and to gtf #
@@ -56,19 +56,19 @@ rule mapref:
         os.path.join(WORKDIR, "{annot}/assembling/SAindex"),
         os.path.join(WORKDIR, "{annot}/assembling/SA"),
         os.path.join(WORKDIR, "{annot}/assembling/Genome"),
-        read1=os.path.join(WORKDIR, "trimming/{tiss}/{anim}/{sample}/{sample}_R1_val_1.fq.gz"),
-        read2=os.path.join(WORKDIR, "trimming/{tiss}/{anim}/{sample}/{sample}_R2_val_2.fq.gz")
+        read1=os.path.join(WORKDIR, "trimming/{sample}/{sample}_R1_val_1.fq.gz"),
+        read2=os.path.join(WORKDIR, "trimming/{sample}/{sample}_R2_val_2.fq.gz")
     output:
-        os.path.join(WORKDIR, "{annot}/mapping/{tiss}/{anim}/{sample}/Log.final.out"),
-        os.path.join(WORKDIR, "{annot}/mapping/{tiss}/{anim}/{sample}/Aligned.sortedByCoord.out.bam"),
-        os.path.join(WORKDIR, "{annot}/mapping/{tiss}/{anim}/{sample}/Aligned.toTranscriptome.out.bam")
+        os.path.join(WORKDIR, "{annot}/mapping/{sample}/Log.final.out"),
+        os.path.join(WORKDIR, "{annot}/mapping/{sample}/Aligned.sortedByCoord.out.bam"),
+        os.path.join(WORKDIR, "{annot}/mapping/{sample}/Aligned.toTranscriptome.out.bam")
     params:
         stardir=os.path.join(WORKDIR, "{annot}/assembling"),
-        prefix=os.path.join(WORKDIR, "{annot}/mapping/{tiss}/{anim}/{sample}/")
+        prefix=os.path.join(WORKDIR, "{annot}/mapping/{sample}/")
     threads:
         4
     log:
-        os.path.join(WORKDIR, "logs/mapping/{tiss}/{anim}/{sample}.map.{annot}.log")
+        os.path.join(WORKDIR, "logs/mapping/{sample}.map.{annot}.log")
     shell:
         # difference with GB version is from --outSAMattributes to --alignSJDBoverhangMin but could be from dcc site
         # that I took from raffine but these could also be defaults parameters so it should not change much the output

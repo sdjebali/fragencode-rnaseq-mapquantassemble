@@ -8,14 +8,14 @@ rule trimming:
         read1=get_fastq1,
         read2=get_fastq2
     output:
-        read1=os.path.join(WORKDIR, "trimming/{tiss}/{anim}/{sample}/{sample}_R1_val_1.fq.gz"),
-        read2=os.path.join(WORKDIR, "trimming/{tiss}/{anim}/{sample}/{sample}_R2_val_2.fq.gz")
+        read1=os.path.join(WORKDIR, "trimming/{sample}/{sample}_R1_val_1.fq.gz"),
+        read2=os.path.join(WORKDIR, "trimming/{sample}/{sample}_R2_val_2.fq.gz")
     params:
         readlength=config["read_length"],
         seqfstread=config["adapt_3p_first_read"],
         seqsndread=config["adapt_3p_second_read"]
     log:
-        os.path.join(WORKDIR, "logs/trimming/{tiss}/{anim}/{sample}.log")
+        os.path.join(WORKDIR, "logs/trimming/{sample}.log")
     shell:
         "minLength=`expr {params.readlength} / 3`; "
         "cutadapt -a {params.seqfstread} -A {params.seqsndread} "
